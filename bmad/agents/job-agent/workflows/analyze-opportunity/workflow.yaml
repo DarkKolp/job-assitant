@@ -1,0 +1,30 @@
+# Analyze Job Opportunity Workflow Configuration
+name: analyze-opportunity
+description: "Analyzes job opportunities against user's knowledge base, calculates match scores, determines tier ratings, and creates structured job folders"
+author: "Nuno (Synapse)"
+version: "1.0.0"
+
+# Load module configuration
+config_source: "{project-root}/bmad/agents/job-agent/config.yaml"
+module_root: "{config_source}:module_root"
+knowledge_base: "{config_source}:knowledge_base.location"
+jobs_database: "{config_source}:jobs_database.location"
+
+# User settings
+user_name: "{config_source}:author"
+date: system-generated
+
+# Workflow type
+template: false  # This is an action workflow
+instructions: "{installed_path}/instructions.md"
+validation: "{installed_path}/checklist.md"
+
+# Component paths
+installed_path: "{module_root}/workflows/analyze-opportunity"
+tier_criteria: "{module_root}/data/tier-criteria.yaml"
+
+# Output configuration
+output_folder: "{jobs_database}/{niche}_{job_title}"
+metadata_file: "{output_folder}/job-metadata.json"
+description_file: "{output_folder}/job-description.md"
+analysis_file: "{output_folder}/analysis.md"

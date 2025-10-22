@@ -1,0 +1,123 @@
+# Job Search Intelligence System Installation Configuration
+module_name: "Job Search Intelligence System"
+module_code: "job-agent"
+installation_date: "2025-10-21"
+
+# Installation steps
+install_steps:
+  - name: 'Create directories'
+    action: 'mkdir'
+    paths:
+      - '{project-root}/bmad/agents/job-agent'
+      - '{project-root}/bmad/agents/job-agent/data'
+      - '{project-root}/bmad/agents/job-agent/agents'
+      - '{project-root}/bmad/agents/job-agent/workflows'
+      - '{project-root}/bmad/agents/job-agent/tasks'
+      - '{project-root}/bmad/agents/job-agent/templates'
+      - '{project-root}/About-me/Projects'
+      - '{project-root}/Jobs'
+
+  - name: 'Copy module configuration'
+    action: 'copy'
+    source: '{installer_path}/config.yaml'
+    dest: '{project-root}/bmad/agents/job-agent/config.yaml'
+
+  - name: 'Copy agents'
+    action: 'copy'
+    source: '{installer_path}/agents/'
+    dest: '{project-root}/bmad/agents/job-agent/agents/'
+
+  - name: 'Copy workflows'
+    action: 'copy'
+    source: '{installer_path}/workflows/'
+    dest: '{project-root}/bmad/agents/job-agent/workflows/'
+
+  - name: 'Copy templates (if any)'
+    action: 'copy'
+    source: '{installer_path}/templates/'
+    dest: '{project-root}/bmad/agents/job-agent/templates/'
+
+  - name: 'Copy data files (if any)'
+    action: 'copy'
+    source: '{installer_path}/data/'
+    dest: '{project-root}/bmad/agents/job-agent/data/'
+
+  - name: 'Register module'
+    action: 'register'
+    manifest: '{project-root}/bmad/_cfg/manifest.yaml'
+
+# External assets
+external_assets:
+  - description: 'Knowledge base folder for professional experiences'
+    source: 'About-me/Projects/'
+    dest: '{project-root}/About-me/Projects/'
+    create_if_missing: true
+
+  - description: 'Jobs database folder for tracked opportunities'
+    source: 'Jobs/'
+    dest: '{project-root}/Jobs/'
+    create_if_missing: true
+
+# Post-install message
+post_install_message: |
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Job Search Intelligence System Installed!
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  📋 Module: job-agent
+  🎯 Location: bmad/agents/job-agent/
+
+  ## Quick Start
+
+  1. Load Alex (your job search orchestrator):
+     ```
+     Load agent from: bmad/agents/job-agent/agents/alex.md
+     ```
+
+  2. View available commands:
+     ```
+     *help
+     ```
+
+  3. Start documenting your experience:
+     ```
+     *new
+     ```
+
+  4. Analyze a job opportunity:
+     ```
+     *analyze [job_url]
+     ```
+
+  ## Folder Structure Created
+
+  📁 About-me/Projects/     → Your professional knowledge base
+  📁 Jobs/                  → Tracked job opportunities
+
+  ## Available Components
+
+  **Agents:**
+  - Alex (Orchestrator & KB Manager)
+  - Job Analyzer (Coming soon - use analyze-opportunity workflow)
+  - Application Assistant (Placeholder - needs CV configuration)
+
+  **Workflows:**
+  - analyze-opportunity (Fully functional)
+  - apply-to-job (Placeholder - needs configuration)
+  - review-knowledge-base (Coming soon)
+  - track-application (Coming soon)
+  - generate-job-report (Coming soon)
+
+  ## Next Steps
+
+  1. Create your first knowledge base entry with `*new`
+  2. Analyze a job posting with `*analyze`
+  3. Configure Application Assistant (see alex-sidecar/instructions.md)
+
+  ## Need Help?
+
+  - Read module README.md for full documentation
+  - Check workflow instructions for detailed guides
+  - Alex will guide you through each process
+
+  Happy job hunting! 🚀
